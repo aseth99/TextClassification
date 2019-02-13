@@ -1,11 +1,11 @@
 import pandas as pd
 from textCleaning import prepare_text_for_lda
 
-data = pd.read_csv('topics.csv') #text in column 1, classifier in column 2.
+data = pd.read_csv('allRegions.csv') #text in column 3, classifier in column 2.
 import numpy as np
 numpy_array = data.as_matrix()
-X = numpy_array[:,1]
-Y = numpy_array[:,2]
+X = numpy_array[:,2]
+Y = numpy_array[:,1]
 
 from sklearn.model_selection import train_test_split
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=12)
@@ -32,13 +32,22 @@ fp = open('allArticles.txt')
 textArr = []
 for i,line in enumerate(fp):
 	if i+1 == 15:
-		print(line)
+		# print(line)
+		textArr.append(line)
+	if i+1 == 14:
+		textArr.append(line)
+	if i+1 == 16:
+		textArr.append(line)
+	if i+1 == 29:
 		textArr.append(line)
 
 tokens = prepare_text_for_lda(sample[0])
 print(tokens)
 tokens2 = prepare_text_for_lda(sample2[0])
 tokens3 = prepare_text_for_lda(textArr[0])
+tokens4 = prepare_text_for_lda(textArr[1])
+tokens5 = prepare_text_for_lda(textArr[2])
+tokens6 = prepare_text_for_lda(textArr[3])
 
 tokenArr = []
 tokenArr.append(tokens)
@@ -46,13 +55,32 @@ tokenArr2 = []
 tokenArr2.append(tokens2)
 tokenArr3 = []
 tokenArr3.append(tokens3)
+tokenArr4 = []
+tokenArr4.append(tokens4)
+tokenArr5 = []
+tokenArr5.append(tokens5)
 
-predicted2 = text_clf.predict(tokens)
-predicted3 = text_clf.predict(tokenArr2)
-predicted4 = text_clf.predict(tokenArr3)
+predicted2 = text_clf.predict([" ".join(tokens)])
+predicted3 = text_clf.predict([" ".join(tokens2)])
+predicted4 = text_clf.predict([" ".join(tokens3)])
+predicted5 = text_clf.predict([" ".join(tokens4)])
+predicted6 = text_clf.predict([" ".join(tokens5)])
+predicted7 = text_clf.predict([" ".join(tokens6)])
 
+print(sample)
 print(predicted2)
 
+print(sample2)
 print(predicted3)
 
+print(textArr[0])
 print(predicted4)
+
+print(textArr[1])
+print(predicted5)
+
+print(textArr[2])
+print(predicted6)
+
+print(textArr[3])
+print(predicted7)
