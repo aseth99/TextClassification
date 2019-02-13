@@ -45,4 +45,6 @@ def prepare_text_for_lda(text):
     tokens = [token for token in tokens if len(token) > 4]
     tokens = [token for token in tokens if token not in en_stop]
     tokens = [get_lemma(token) for token in tokens]
+    tokens = [get_lemma2(token) for token in tokens]
+    
     return tokens
